@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { MouseTrackingEffectDirective } from '../../../shared/directives/mouse-tracking-effect.directive';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,8 @@ import { MouseTrackingEffectDirective } from '../../../shared/directives/mouse-t
   styleUrls: ['./register.component.css', '../auth.css', '../mouse-tracking.css'],
 })
 export class RegisterComponent {
+  private readonly authService = inject(AuthService)
+
   protected readonly submitted = signal(false);
 
   protected readonly form = new FormGroup({
@@ -48,5 +51,16 @@ export class RegisterComponent {
     }
 
     this.submitted.set(true);
+
+    const {username,email, fechaNacimiento,password} = this.form.getRawValue();
+
+    this.authService.register({username,email,fechaNacimiento,password}).subscribe({
+      next: (response)=>{
+          if(response.success){
+            alert(response.mensaje);
+          }
+        }
+      }
+    )
   }
 }
