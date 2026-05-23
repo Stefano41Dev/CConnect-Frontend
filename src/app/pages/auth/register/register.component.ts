@@ -6,13 +6,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { MouseTrackingEffectDirective } from '../../../shared/directives/mouse-tracking-effect.directive';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, MouseTrackingEffectDirective],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css', '../auth.css'],
+  styleUrls: ['./register.component.css', '../auth.css', '../mouse-tracking.css'],
 })
 export class RegisterComponent {
   protected readonly submitted = signal(false);

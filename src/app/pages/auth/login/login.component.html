@@ -1,4 +1,4 @@
-<div class="auth-page">
+<div class="auth-page" appMouseTrackingEffect>
   <div class="auth-bg" aria-hidden="true">
     <div class="auth-bg__orb auth-bg__orb--1"></div>
     <div class="auth-bg__orb auth-bg__orb--2"></div>
@@ -31,7 +31,7 @@
             id="username"
             type="text"
             formControlName="username"
-            placeholder="tu_usuario"
+            placeholder=""
             autocomplete="username"
           />
           @if (form.controls.username.touched && form.controls.username.invalid) {
@@ -75,7 +75,7 @@
           }
         </button>
       </form>
-
+      <!---
       <div class="auth-divider">o continúa con</div>
 
       <div class="auth-social">
@@ -96,7 +96,7 @@
           </svg>
           Google
         </button>
-      </div>
+      </div>-->
 
       <p class="auth-footer">
         ¿No tienes cuenta?

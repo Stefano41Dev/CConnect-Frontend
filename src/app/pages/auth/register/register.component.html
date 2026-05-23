@@ -1,4 +1,4 @@
-<div class="auth-page">
+<div class="auth-page" appMouseTrackingEffect>
   <div class="auth-bg" aria-hidden="true">
     <div class="auth-bg__orb auth-bg__orb--1"></div>
     <div class="auth-bg__orb auth-bg__orb--2"></div>
@@ -31,7 +31,7 @@
             id="reg-username"
             type="text"
             formControlName="username"
-            placeholder="tu_usuario"
+            placeholder=""
             autocomplete="username"
           />
           @if (form.controls.username.touched && form.controls.username.hasError('required')) {
@@ -53,7 +53,7 @@
             id="reg-email"
             type="email"
             formControlName="email"
-            placeholder="tu@email.com"
+            placeholder=""
             autocomplete="email"
           />
           @if (form.controls.email.touched && form.controls.email.hasError('required')) {

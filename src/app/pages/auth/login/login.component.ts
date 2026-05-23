@@ -7,13 +7,14 @@ import {
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { MouseTrackingEffectDirective } from '../../../shared/directives/mouse-tracking-effect.directive';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, MouseTrackingEffectDirective],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css', '../auth.css'],
+  styleUrls: ['./login.component.css', '../auth.css', '../mouse-tracking.css'],
 })
 export class LoginComponent {
   private readonly authService = inject(AuthService);
