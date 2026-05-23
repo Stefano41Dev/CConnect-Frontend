@@ -6,13 +6,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css', '../auth.css'],
 })
 export class LoginComponent {
   private readonly authService = inject(AuthService);

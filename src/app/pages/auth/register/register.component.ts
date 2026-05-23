@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css', '../auth.css'],
 })
 export class RegisterComponent {
   protected readonly submitted = signal(false);
