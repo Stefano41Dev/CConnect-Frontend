@@ -1,6 +1,8 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Navbar } from "../../shared/components/navbar/navbar";
+import { SiderbarHome } from "../../shared/components/siderbar-home/siderbar-home";
 
 interface Post {
   id: string;
@@ -21,12 +23,12 @@ interface Post {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, Navbar, SiderbarHome],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  sidebarOpen = signal(true);
+  
   posts = signal<Post[]>([
     {
       id: '1',
@@ -77,22 +79,6 @@ export class HomeComponent {
       liked: false,
     },
   ]);
-
-  sidebarItems = [
-    { icon: 'home', label: 'Inicio' },
-    { icon: 'compass', label: 'Explorar' },
-    { icon: 'bell', label: 'Notificaciones' },
-    { icon: 'mail', label: 'Mensajes' },
-    { icon: 'bookmark', label: 'Guardados' },
-    { icon: 'user', label: 'Perfil' },
-    { icon: 'settings', label: 'Ajustes' },
-  ];
-
-  activeMenu = signal('inicio');
-
-  setActiveMenu(item: string) {
-    this.activeMenu.set(item.toLowerCase());
-  }
 
   toggleLike(postId: string) {
     const post = this.posts().find((p) => p.id === postId);
