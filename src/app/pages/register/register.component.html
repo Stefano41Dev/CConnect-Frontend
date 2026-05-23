@@ -1,0 +1,132 @@
+<div class="auth-page">
+  <div class="auth-bg" aria-hidden="true">
+    <div class="auth-bg__orb auth-bg__orb--1"></div>
+    <div class="auth-bg__orb auth-bg__orb--2"></div>
+    <div class="auth-bg__grid"></div>
+  </div>
+
+  <div class="auth-shell">
+    <div class="auth-card">
+      <header class="auth-brand">
+        <div class="auth-brand__logo" aria-hidden="true">C</div>
+        <h1 class="auth-brand__title">Crea tu cuenta</h1>
+        <p class="auth-brand__subtitle">Únete a CConnect y conecta con tu comunidad</p>
+      </header>
+
+      @if (submitted()) {
+        <div class="auth-alert auth-alert--success" role="status">
+          Formulario válido. El registro se conectará al backend próximamente.
+        </div>
+      }
+
+      <form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div
+          class="auth-field"
+          [class.auth-field--error]="
+            form.controls.username.touched && form.controls.username.invalid
+          "
+        >
+          <label for="reg-username">Usuario</label>
+          <input
+            id="reg-username"
+            type="text"
+            formControlName="username"
+            placeholder="tu_usuario"
+            autocomplete="username"
+          />
+          @if (form.controls.username.touched && form.controls.username.hasError('required')) {
+            <span class="auth-field__error">El usuario es obligatorio</span>
+          }
+          @if (form.controls.username.touched && form.controls.username.hasError('minlength')) {
+            <span class="auth-field__error">Mínimo 3 caracteres</span>
+          }
+        </div>
+
+        <div
+          class="auth-field"
+          [class.auth-field--error]="
+            form.controls.email.touched && form.controls.email.invalid
+          "
+        >
+          <label for="reg-email">Correo electrónico</label>
+          <input
+            id="reg-email"
+            type="email"
+            formControlName="email"
+            placeholder="tu@email.com"
+            autocomplete="email"
+          />
+          @if (form.controls.email.touched && form.controls.email.hasError('required')) {
+            <span class="auth-field__error">El correo es obligatorio</span>
+          }
+          @if (form.controls.email.touched && form.controls.email.hasError('email')) {
+            <span class="auth-field__error">Introduce un correo válido</span>
+          }
+        </div>
+
+        <div
+          class="auth-field"
+          [class.auth-field--error]="
+            form.controls.fechaNacimiento.touched && form.controls.fechaNacimiento.invalid
+          "
+        >
+          <label for="fechaNacimiento">Fecha de nacimiento</label>
+          <input
+            id="fechaNacimiento"
+            type="date"
+            formControlName="fechaNacimiento"
+          />
+          @if (
+            form.controls.fechaNacimiento.touched && form.controls.fechaNacimiento.invalid
+          ) {
+            <span class="auth-field__error">La fecha de nacimiento es obligatoria</span>
+          }
+        </div>
+
+        <div
+          class="auth-field"
+          [class.auth-field--error]="
+            form.controls.password.touched && form.controls.password.invalid
+          "
+        >
+          <label for="reg-password">Contraseña</label>
+          <input
+            id="reg-password"
+            type="password"
+            formControlName="password"
+            placeholder="Mínimo 8 caracteres"
+            autocomplete="new-password"
+          />
+          @if (form.controls.password.touched && form.controls.password.hasError('required')) {
+            <span class="auth-field__error">La contraseña es obligatoria</span>
+          }
+          @if (form.controls.password.touched && form.controls.password.hasError('minlength')) {
+            <span class="auth-field__error">Mínimo 8 caracteres</span>
+          }
+        </div>
+
+        <label
+          class="auth-checkbox"
+          [class.auth-field--error]="form.controls.terms.touched && form.controls.terms.invalid"
+        >
+          <input type="checkbox" formControlName="terms" />
+          <span>
+            Acepto los
+            <a href="#">términos y condiciones</a>
+            y la política de privacidad de CConnect
+          </span>
+        </label>
+        @if (form.controls.terms.touched && form.controls.terms.invalid) {
+          <span class="auth-field__error">Debes aceptar los términos para continuar</span>
+        }
+
+        <button class="auth-btn auth-btn--primary" type="submit">Crear cuenta</button>
+      </form>
+
+      <p class="auth-footer">
+        ¿Ya tienes cuenta?
+        <a routerLink="/login">Iniciar sesión</a>
+      </p>
+    </div>
+  </div>
+</div>
