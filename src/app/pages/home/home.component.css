@@ -108,208 +108,6 @@
   gap: 1.5rem;
 }
 
-/* Post Card */
-.post-card {
-  background: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transition:
-    transform var(--transition),
-    box-shadow var(--transition),
-    border-color var(--transition);
-}
-
-.post-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-/* Post Header */
-.post-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  gap: 1rem;
-}
-
-.post-author {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex: 1;
-}
-
-.post-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.post-author-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.post-author-name {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--text);
-}
-
-.post-author-handle {
-  font-size: 0.825rem;
-  color: var(--text-muted);
-}
-
-.post-time {
-  font-size: 0.825rem;
-  color: var(--text-dim);
-  white-space: nowrap;
-}
-
-.post-more-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  padding: 0.25rem;
-  border-radius: var(--radius-md);
-  transition: all var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.post-more-btn:hover {
-  background: rgba(108, 92, 242, 0.1);
-  color: var(--primary-light);
-}
-
-.post-more-btn .icon {
-  width: 20px;
-  height: 20px;
-}
-
-/* Post Content */
-.post-content {
-  margin-bottom: 1rem;
-}
-
-.post-text {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--text);
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-/* Post Images */
-.post-images {
-  display: grid;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-.grid-1 {
-  grid-template-columns: 1fr;
-}
-
-.grid-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-3 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-3 > :first-child {
-  grid-column: 1 / -1;
-}
-
-.grid-4 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.post-image-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: rgba(0, 0, 0, 0.2);
-  aspect-ratio: 1;
-}
-
-.post-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--transition);
-}
-
-.post-image-wrapper:hover .post-image {
-  transform: scale(1.05);
-}
-
-/* Post Footer */
-.post-footer {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.post-action {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-muted);
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  font-size: 0.825rem;
-  transition: all var(--transition);
-  font-family: inherit;
-}
-
-.post-action:hover {
-  border-color: rgba(108, 92, 242, 0.3);
-  background: rgba(108, 92, 242, 0.08);
-  color: var(--primary-light);
-}
-
-.post-action .icon {
-  width: 18px;
-  height: 18px;
-}
-
-.action-count {
-  font-weight: 500;
-}
-
-.post-action--like.liked {
-  color: #e74c3c;
-  border-color: rgba(231, 76, 60, 0.3);
-  background: rgba(231, 76, 60, 0.1);
-}
-
-.post-action--like.liked .action-count {
-  color: #e74c3c;
-}
 
 /* Responsive */
 @media (max-width: 1200px) {
@@ -379,10 +177,11 @@
   .feed {
     padding: 1rem 1rem;
   }
-
+  /*
   .post-card {
     padding: 1rem;
   }
+    */
   /*
   .sidebar-item-label {
     display: none;
@@ -402,13 +201,14 @@
     padding: 0.75rem;
   }
 */
+/*
   .post-footer {
     gap: 1rem;
   }
 
   .posts-container {
     gap: 1rem;
-  }
+  }*/
 }
 
 @media (max-width: 480px) {
@@ -430,7 +230,7 @@
   .feed {
     padding: 0.75rem;
   }
-
+  /*
   .post-card {
     padding: 0.875rem;
     border-radius: var(--radius-md);
@@ -452,6 +252,7 @@
   .post-text {
     font-size: 0.875rem;
   }
+  */
   /*
   .sidebar {
     padding: 0.75rem;
@@ -465,6 +266,7 @@
     padding: 0.5rem;
   }
 */
+/*
   .post-footer {
     gap: 0.5rem;
   }
@@ -478,4 +280,5 @@
     width: 16px;
     height: 16px;
   }
+    */
 }

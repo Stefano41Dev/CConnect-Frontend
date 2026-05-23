@@ -6,93 +6,18 @@
     <div class="home-bg__orb home-bg__orb--2"></div>
     <div class="home-bg__grid"></div>
   </div>
-
   <!-- Navbar -->
   <app-navbar/>
-
   <!-- Main container -->
   <div class="main-container">
     <!-- Sidebar -->
     <app-siderbar-home/>
-
     <!-- Feed -->
     <main class="feed">
       <!-- Posts -->
       <div class="posts-container">
         @for (post of posts(); track post.id) {
-          <article class="post-card">
-            <!-- Post Header -->
-            <div class="post-header">
-              <div class="post-author">
-                <img
-                  [src]="post.author.avatar"
-                  alt="{{ post.author.name }}"
-                  class="post-avatar"
-                />
-                <div class="post-author-info">
-                  <div class="post-author-name">{{ post.author.name }}</div>
-                  <div class="post-author-handle">{{ post.author.handle }}</div>
-                </div>
-              </div>
-              <div class="post-time">{{ post.timestamp }}</div>
-              <button class="post-more-btn" aria-label="Más opciones">
-                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            <!-- Post Content -->
-            <div class="post-content">
-              <p class="post-text">{{ post.content }}</p>
-
-              <!-- Images Grid -->
-              @if (post.images && post.images.length > 0) {
-                <div class="post-images" [ngClass]="'grid-' + post.images.length">
-                  @for (image of post.images; track image; let i = $index) {
-                    <div class="post-image-wrapper">
-                      <img
-                        [src]="image"
-                        alt="Post image {{ i + 1 }}"
-                        class="post-image"
-                      />
-                    </div>
-                  }
-                </div>
-              }
-            </div>
-
-            <!-- Post Footer -->
-            <div class="post-footer">
-              <button
-                class="post-action post-action--comment"
-                aria-label="Comentar"
-              >
-                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"
-                  />
-                </svg>
-                <span class="action-count">{{ post.comments }}</span>
-              </button>
-
-              <button
-                class="post-action post-action--like"
-                [class.liked]="post.liked"
-                (click)="toggleLike(post.id)"
-                aria-label="Me gusta"
-              >
-                <svg class="icon" viewBox="0 0 24 24" [attr.fill]="post.liked ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="2">
-                  <path
-                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                  />
-                </svg>
-                <span class="action-count" [class.liked]="post.liked">{{ post.likes }}</span>
-              </button>
-            </div>
-          </article>
+          <app-post-card [post]="post"/>
         }
       </div>
     </main>

@@ -1,0 +1,58 @@
+<article class="post-card">
+            <!-- Post Header -->
+            <div class="post-header">
+              <div class="post-author">
+                <img
+                  src="default-profile.jpg"
+                  alt="{{ post.usernameAutor }}"
+                  class="post-avatar"
+                />
+                <div class="post-author-info">
+                  <div class="post-author-name">{{ post.usernameAutor }}</div>
+                </div>
+              </div>
+              <div class="post-time">{{ post.fechaPublicacion }}</div>
+              <button class="post-more-btn" aria-label="Más opciones">
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Post Content -->
+            <div class="post-content">
+              <p class="post-text">{{ post.contenido }}</p>
+
+              <!-- Images Grid -->
+              @if (post.imagenesUrl && post.imagenesUrl.length > 0) {
+                <div class="post-images" [ngClass]="'grid-' + post.imagenesUrl.length">
+                  @for (image of post.imagenesUrl; track image; let i = $index) {
+                    <div class="post-image-wrapper">
+                      <img
+                        [src]="image"
+                        alt="Post image {{ i + 1 }}"
+                        class="post-image"
+                      />
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+
+            <!-- Post Footer -->
+            <div class="post-footer">
+              <button
+                class="post-action post-action--comment"
+                aria-label="Comentar"
+              >
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"
+                  />
+                </svg>
+                <span class="action-count">{{ post.totalComentarios }}</span>
+              </button>
+            </div>
+</article>
