@@ -14,7 +14,7 @@ import { AuthService } from '../../../core/services/auth.service';
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink, MouseTrackingEffectDirective],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css', '../auth.css', '../mouse-tracking.css'],
+  styleUrls: ['./register.component.css', '../auth.css', '../../../shared/directives/mouse-tracking.css'],
 })
 export class RegisterComponent {
   private readonly authService = inject(AuthService)

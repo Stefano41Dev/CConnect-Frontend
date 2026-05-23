@@ -14,7 +14,7 @@ import { MouseTrackingEffectDirective } from '../../../shared/directives/mouse-t
   standalone: true,
   imports: [ReactiveFormsModule, RouterLink, MouseTrackingEffectDirective],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css', '../auth.css', '../mouse-tracking.css'],
+  styleUrls: ['./login.component.css', '../auth.css', '../../../shared/directives/mouse-tracking.css'],
 })
 export class LoginComponent {
   private readonly authService = inject(AuthService);
