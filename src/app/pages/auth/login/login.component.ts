@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { MouseTrackingEffectDirective } from '../../../shared/directives/mouse-tracking-effect.directive';
 
@@ -18,7 +18,7 @@ import { MouseTrackingEffectDirective } from '../../../shared/directives/mouse-t
 })
 export class LoginComponent {
   private readonly authService = inject(AuthService);
-
+  private readonly router = inject(Router)
   protected readonly loading = signal(false);
   protected readonly errorMessage = signal<string | null>(null);
 
@@ -45,8 +45,11 @@ export class LoginComponent {
     const { username, password } = this.form.getRawValue();
 
     this.authService.login({ username, password }).subscribe({
-      next: () => {
+      next: (response) => {
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/home'])
         this.errorMessage.set(null);
+
       },
       error: () => {
         this.errorMessage.set(

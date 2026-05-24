@@ -115,43 +115,6 @@
     margin-left: 0;
     width: 100%;
   }
-  /*
-  .sidebar {
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    position: static;
-    top: auto;
-    padding: 1rem;
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-
-  .sidebar-content {
-    flex-direction: row;
-    gap: 1rem;
-    width: 100%;
-  }
-
-  .sidebar-nav {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .sidebar-item {
-    flex: 0 1 auto;
-    white-space: nowrap;
-  }
-
-  .new-post-btn {
-    width: auto;
-    flex-shrink: 0;
-  }
-*/
   .main-container {
     flex-direction: column;
     margin-top: 72px;
@@ -159,126 +122,14 @@
 }
 
 @media (max-width: 768px) {
-  /*
-  .navbar-content {
-    padding: 0 1rem;
-  }
-
-  .logo-text {
-    display: inline;
-  }
-
-  .logo-icon {
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
-  }
-*/
   .feed {
     padding: 1rem 1rem;
   }
-  /*
-  .post-card {
-    padding: 1rem;
-  }
-    */
-  /*
-  .sidebar-item-label {
-    display: none;
-  }
-
-  .sidebar-item {
-    justify-content: center;
-    padding: 0.75rem;
-  }
-
-  .new-post-btn span {
-    display: none;
-  }
-
-  .new-post-btn {
-    justify-content: center;
-    padding: 0.75rem;
-  }
-*/
-/*
-  .post-footer {
-    gap: 1rem;
-  }
-
-  .posts-container {
-    gap: 1rem;
-  }*/
 }
 
 @media (max-width: 480px) {
-  /*
-  .navbar-content {
-    padding: 0 0.75rem;
-  }
-
-  .logo-icon {
-    width: 32px;
-    height: 32px;
-  }
-
-  .profile-avatar {
-    width: 40px;
-    height: 40px;
-  }
-*/
   .feed {
     padding: 0.75rem;
   }
-  /*
-  .post-card {
-    padding: 0.875rem;
-    border-radius: var(--radius-md);
-  }
 
-  .post-header {
-    gap: 0.5rem;
-  }
-
-  .post-avatar {
-    width: 40px;
-    height: 40px;
-  }
-
-  .post-author-name {
-    font-size: 0.875rem;
-  }
-
-  .post-text {
-    font-size: 0.875rem;
-  }
-  */
-  /*
-  .sidebar {
-    padding: 0.75rem;
-  }
-
-  .sidebar-nav {
-    gap: 0.25rem;
-  }
-
-  .sidebar-item {
-    padding: 0.5rem;
-  }
-*/
-/*
-  .post-footer {
-    gap: 0.5rem;
-  }
-
-  .post-action {
-    padding: 0.4rem 0.5rem;
-    font-size: 0.75rem;
-  }
-
-  .post-action .icon {
-    width: 16px;
-    height: 16px;
-  }
-    */
 }
