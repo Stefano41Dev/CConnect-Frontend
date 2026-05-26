@@ -10,6 +10,7 @@ import { Component, Input } from '@angular/core';
 export class PostCard {
   @Input({required:true})
   post!:{
+    userid:string,
     usernameAutor:string,
     fechaPublicacion: string,
     contenido: string,
