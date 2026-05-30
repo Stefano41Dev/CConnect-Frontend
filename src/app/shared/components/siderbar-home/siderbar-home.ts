@@ -1,5 +1,5 @@
 import { Component, signal, ViewChild } from '@angular/core';
-import { PostModalComponent } from './post-modal';
+import { PostModalComponent } from '../post-model/post-modal';
 
 @Component({
   selector: 'app-siderbar-home',
