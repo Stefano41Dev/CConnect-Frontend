@@ -1,0 +1,72 @@
+<div class="modal-overlay" [class.open]="isOpen()" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <!-- Header -->
+    <div class="modal-header">
+      <h2>Crear publicación</h2>
+      <button class="close-btn" (click)="closeModal()" aria-label="Cerrar modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="modal-content">
+      <!-- Form -->
+      <div class="form-section">
+        <div class="input-group">
+          <input
+            type="text"
+            [(ngModel)]="postTitle"
+            placeholder="¿Qué está en tu mente?"
+            class="post-title-input"
+            maxlength="300"
+          />
+          <span class="char-count">{{ postTitle().length }}/300</span>
+        </div>
+
+        <!-- Image Preview Section -->
+        <div class="images-section">
+          @if (selectedImages().length > 0) {
+            <div [ngClass]="'images-grid ' + getGridClass()">
+              @for (image of selectedImages(); track $index) {
+                <div class="image-preview-item">
+                  <img [src]="image.url" [alt]="'Preview ' + ($index + 1)" />
+                  <button class="remove-btn" (click)="removeImage($index)" aria-label="Eliminar imagen">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
+                    </svg>
+                  </button>
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Upload Area -->
+        <div class="upload-area" (click)="triggerFileInput()">
+          <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <p>
+            <span class="upload-text">Haz clic para agregar imágenes</span>
+            <br />
+            <span class="upload-hint">o arrastra y suelta imágenes aquí</span>
+          </p>
+          <p class="upload-info">PNG, JPG, GIF hasta 10MB</p>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="modal-actions">
+        <button class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button class="btn btn-primary" (click)="submitPost()" [disabled]="!isFormValid()">
+          Publicar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

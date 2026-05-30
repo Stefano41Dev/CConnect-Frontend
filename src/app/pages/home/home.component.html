@@ -16,7 +16,7 @@
     <main class="feed">
       <!-- Posts -->
       <div class="posts-container">
-        @for (post of posts(); track post.id) {
+        @for (post of posts(); track post.userid) {
           <app-post-card [post]="post"/>
         }
       </div>

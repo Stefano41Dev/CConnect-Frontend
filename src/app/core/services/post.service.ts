@@ -4,6 +4,7 @@ import { environment } from "../../../environment/environment";
 import { Observable } from "rxjs";
 import { PublicacionDtoResponse } from "../models/post/PublicacionDtoResponse";
 import { PageResponse } from "../models/pagination/PageResponse";
+import { PublicacionDtoRequest } from "../models/post/PublicacionDtoRequest";
 @Injectable({
   providedIn: 'root',
 })
@@ -16,16 +17,30 @@ export class PostService {
 
     listPosts(page: number = 0,size: number = 10, sort: string = 'fechaPublicacion,desc'):Observable<PageResponse<PublicacionDtoResponse>> {
 
-    const params = new HttpParams()
+        const params = new HttpParams()
         .set('page', page)
         .set('size', size)
         .set('sort', sort);
 
-    return this.httpClient.get<PageResponse<PublicacionDtoResponse>>(
-        this.apiUrl,
-        { params }
-       
-    );
-}
+        return this.httpClient.get<PageResponse<PublicacionDtoResponse>>(this.apiUrl,{ params });
+    }
+
+    newPost(publicacion: PublicacionDtoRequest, imagenes: File[]): Observable<PublicacionDtoResponse> {
+        const formData = new FormData();
+        
+        formData.append('publicacionDtoRequest',new Blob(
+            [JSON.stringify(publicacion)],
+            { type: 'application/json' }
+        ));
+        
+        if (imagenes.length) {
+            imagenes.forEach(imagen => {
+                formData.append('multipartFile', imagen);
+            });
+        }
+
+        return this.httpClient.post<PublicacionDtoResponse>(this.apiUrl, formData);
+    }
+    
 
 }

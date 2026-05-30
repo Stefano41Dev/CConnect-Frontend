@@ -18,7 +18,9 @@
   --radius-sm: 8px;
   --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+.disable{
+  display: none;
+}
 *,
 *::before,
 *::after {

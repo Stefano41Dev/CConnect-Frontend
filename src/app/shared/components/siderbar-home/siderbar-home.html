@@ -66,11 +66,14 @@
         </nav>
 
         <!-- Botón Nueva Publicación -->
-        <button class="new-post-btn">
+        <button class="new-post-btn" (click)="newPost()">
           <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
           </svg>
           <span>Nueva publicación</span>
         </button>
       </div>
-    </aside>
+</aside>
+
+<!-- Modal Component -->
+<app-post-modal></app-post-modal>

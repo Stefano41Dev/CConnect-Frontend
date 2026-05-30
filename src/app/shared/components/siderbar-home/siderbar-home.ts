@@ -1,12 +1,15 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ViewChild } from '@angular/core';
+import { PostModalComponent } from './post-modal';
 
 @Component({
   selector: 'app-siderbar-home',
-  imports: [],
+  imports: [PostModalComponent],
   templateUrl: './siderbar-home.html',
   styleUrl: './siderbar-home.css',
 })
 export class SiderbarHome {
+  @ViewChild(PostModalComponent) postModal!: PostModalComponent;
+  
   sidebarOpen = signal(true);
   sidebarItems = [
     { icon: 'home', label: 'Inicio' },
@@ -22,5 +25,9 @@ export class SiderbarHome {
 
   setActiveMenu(item: string) {
     this.activeMenu.set(item.toLowerCase());
+  }
+
+  newPost() {
+    this.postModal?.openModal();
   }
 }
