@@ -42,5 +42,8 @@ export class PostService {
         return this.httpClient.post<PublicacionDtoResponse>(this.apiUrl, formData);
     }
     
+    searchPost(idPublicacion: number): Observable<PublicacionDtoResponse>{
+        return this.httpClient.get<PublicacionDtoResponse>(`${this.apiUrl}/${idPublicacion}`);
+    }
 
 }
