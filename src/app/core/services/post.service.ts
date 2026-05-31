@@ -43,11 +43,11 @@ export class PostService {
         return this.httpClient.post<PublicacionDtoResponse>(this.apiUrl, formData);
     }
     
-    searchPost(idPublicacion: number): Observable<PublicacionDtoResponse>{
+    getPostById(idPublicacion: string): Observable<PublicacionDtoResponse>{
         return this.httpClient.get<PublicacionDtoResponse>(`${this.apiUrl}/${idPublicacion}`);
     }
 
-    searchCommentsPost(idPublicacion: number): Observable<PageResponse<ComentarioDtoResponse>>{
+    getCommentsPostById(idPublicacion: string): Observable<PageResponse<ComentarioDtoResponse>>{
         return this.httpClient.get<PageResponse<ComentarioDtoResponse>>(`${this.apiUrl}/${idPublicacion}/comments`);
     }
 

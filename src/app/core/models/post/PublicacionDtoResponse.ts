@@ -1,4 +1,5 @@
 export interface PublicacionDtoResponse{
+    id: string,
     userid: string,
     usernameAutor: string,
     contenido: string,

@@ -1,0 +1,17 @@
+@if(loading()){
+  <p>Loading...</p>
+}
+@else{
+    <p>{{ post()?.usernameAutor }}</p>
+    <p>{{ post()?.contenido }}</p>
+    <p>{{ post()?.fechaPublicacion }}</p>
+    <p>{{ post()?.imagenesUrl }}</p>
+    
+    @for(comment of comments()?.content ?? []; track comment.id) {
+    <div>
+        {{comment.username}}
+        {{ comment.fechaPublicacion }}
+        {{ comment.contenido }}
+    </div>
+  }
+}
