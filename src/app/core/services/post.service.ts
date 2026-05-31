@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { PublicacionDtoResponse } from "../models/post/PublicacionDtoResponse";
 import { PageResponse } from "../models/pagination/PageResponse";
 import { PublicacionDtoRequest } from "../models/post/PublicacionDtoRequest";
+import { ComentarioDtoResponse } from "../models/comment/ComentarioDtoResponse";
 @Injectable({
   providedIn: 'root',
 })
@@ -44,6 +45,10 @@ export class PostService {
     
     searchPost(idPublicacion: number): Observable<PublicacionDtoResponse>{
         return this.httpClient.get<PublicacionDtoResponse>(`${this.apiUrl}/${idPublicacion}`);
+    }
+
+    searchCommentsPost(idPublicacion: number): Observable<PageResponse<ComentarioDtoResponse>>{
+        return this.httpClient.get<PageResponse<ComentarioDtoResponse>>(`${this.apiUrl}/${idPublicacion}/comments`);
     }
 
 }
