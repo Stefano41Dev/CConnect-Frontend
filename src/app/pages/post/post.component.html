@@ -1,17 +1,126 @@
-@if(loading()){
-  <p>Loading...</p>
-}
-@else{
-    <p>{{ post()?.usernameAutor }}</p>
-    <p>{{ post()?.contenido }}</p>
-    <p>{{ post()?.fechaPublicacion }}</p>
-    <p>{{ post()?.imagenesUrl }}</p>
+<div class="post-page-container">
+  <!-- Background decorativo -->
+  <div class="post-bg" aria-hidden="true">
+    <div class="post-bg__orb post-bg__orb--1"></div>
+    <div class="post-bg__orb post-bg__orb--2"></div>
+    <div class="post-bg__grid"></div>
+  </div>
+
+  <!-- Navbar -->
+  <app-navbar/>
+
+  <!-- Main container -->
+  <div class="main-container">
+    <!-- Sidebar -->
+    <app-siderbar-home/>
     
-    @for(comment of comments()?.content ?? []; track comment.id) {
-    <div>
-        {{comment.username}}
-        {{ comment.fechaPublicacion }}
-        {{ comment.contenido }}
-    </div>
-  }
-}
+    <!-- Feed -->
+    <main class="post-feed">
+      @if(loading()) {
+        <app-loading/>
+      } @else {
+        <!-- Post Detail Card -->
+        @if(post()) {
+          <article class="post-detail-card">
+            <!-- Post Header -->
+            <div class="post-header">
+              <div class="post-author">
+                <img
+                  src="default-profile.jpg"
+                  alt="{{ post()?.usernameAutor }}"
+                  class="post-avatar"
+                />
+                <div class="post-author-info">
+                  <div class="post-author-name">{{ post()?.usernameAutor }}</div>
+                </div>
+              </div>
+              <div class="post-time">{{ post()?.fechaPublicacion }}</div>
+            </div>
+
+            <!-- Post Content -->
+            <div class="post-content">
+              <p class="post-text">{{ post()?.contenido }}</p>
+
+              <!-- Images Grid -->
+              @if (post()?.imagenesUrl && post()!.imagenesUrl.length > 0) {
+                <div class="post-images" [ngClass]="'grid-' + post()!.imagenesUrl.length">
+                  @for (image of post()!.imagenesUrl; track image; let i = $index) {
+                    <div class="post-image-wrapper">
+                      <img
+                        [src]="image"
+                        alt="Post image {{ i + 1 }}"
+                        class="post-image"
+                      />
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          </article>
+        }
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+          <h3 class="comments-title">Comentarios</h3>
+          
+          @if(comments() && comments()!.content.length === 0) {
+            <div class="no-comments">
+              <p>No hay comentarios aún</p>
+            </div>
+          } @else {
+            <div class="comments-list">
+              @for(comment of comments()?.content ?? []; track comment.id) {
+                <div class="comment-item">
+                  <div class="comment-header">
+                    <div class="comment-author">
+                      <img
+                        src="default-profile.jpg"
+                        alt="{{ comment.username }}"
+                        class="comment-avatar"
+                      />
+                      <div class="comment-author-info">
+                        <div class="comment-author-name">{{ comment.username }}</div>
+                        <div class="comment-time">{{ comment.fechaPublicacion }}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="comment-text">{{ comment.contenido }}</p>
+                </div>
+              }
+            </div>
+
+            <!-- Pagination -->
+            <div class="comments-pagination">
+              <button
+                class="pagination-btn"
+                [disabled]="currentCommentPage() === 0"
+                (click)="goToPreviousPage()"
+                aria-label="Página anterior"
+              >
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+              </button>
+              
+              <span class="pagination-info">
+                Página {{ (comments()?.number ?? 0) + 1 }} de {{ comments()?.totalPages ?? 1 }}
+              </span>
+              
+              <button
+                class="pagination-btn"
+                [disabled]="!comments() || comments()?.last"
+                (click)="goToNextPage()"
+                aria-label="Página siguiente"
+              >
+                <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </main>
+  </div>
+</div>
+

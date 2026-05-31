@@ -47,8 +47,13 @@ export class PostService {
         return this.httpClient.get<PublicacionDtoResponse>(`${this.apiUrl}/${idPublicacion}`);
     }
 
-    getCommentsPostById(idPublicacion: string): Observable<PageResponse<ComentarioDtoResponse>>{
-        return this.httpClient.get<PageResponse<ComentarioDtoResponse>>(`${this.apiUrl}/${idPublicacion}/comments`);
+    getCommentsPostById(idPublicacion: string, page: number = 0, size: number = 5, sort: string = 'fechaPublicacion,desc'): Observable<PageResponse<ComentarioDtoResponse>>{
+        const params = new HttpParams()
+        .set('page', page)
+        .set('size', size)
+        .set('sort', sort);
+        
+        return this.httpClient.get<PageResponse<ComentarioDtoResponse>>(`${this.apiUrl}/${idPublicacion}/comments`, { params });
     }
 
 }
