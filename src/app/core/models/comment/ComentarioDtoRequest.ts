@@ -1,4 +1,4 @@
 export interface ComentarioDtoRequest{
-    idPublicacion: number;
+    idPublicacion: string;
     contenido: string;  
 }

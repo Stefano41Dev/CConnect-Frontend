@@ -9,22 +9,32 @@ import { PageResponse } from '../../core/models/pagination/PageResponse';
 import { Navbar } from '../../shared/components/navbar/navbar';
 import { SiderbarHome } from '../../shared/components/siderbar-home/siderbar-home';
 import { Loading } from '../../shared/components/loading/loading';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ComentarioDtoRequest } from '../../core/models/comment/ComentarioDtoRequest';
+import { CommentService } from '../../core/services/comment.service';
 
 @Component({
   selector: 'app-post',
-  imports: [CommonModule, Navbar, SiderbarHome, Loading],
+  imports: [CommonModule, Navbar, SiderbarHome, Loading, ReactiveFormsModule],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css',
 })
 export class PostComponent {
   private activeRoute = inject(ActivatedRoute);
   private postService = inject(PostService);
+  private commentService = inject(CommentService);
   
   post = signal<PublicacionDtoResponse | null>(null);
   comments = signal<PageResponse<ComentarioDtoResponse> | null>(null);
   loading = signal(true);
   currentCommentPage = signal(0);
   postId: string | null = null;
+
+  protected readonly formComment = new FormGroup({
+    contenido: new FormControl('',{
+      nonNullable: true,
+    })
+  })
 
   ngOnInit(){
     this.postId = this.activeRoute.snapshot.paramMap.get('id');
@@ -81,5 +91,21 @@ export class PostComponent {
           this.loading.set(false);
         }
       });
+  }
+
+  newComment(idPublicacion:string){
+    const {contenido} = this.formComment.getRawValue();
+
+    const comentarioRequest: ComentarioDtoRequest = {
+      idPublicacion: idPublicacion,
+      contenido: contenido
+    }
+    this.commentService.newComment(comentarioRequest).subscribe({
+      next: () => {
+        this.formComment.reset();
+        this.loadComments();
+      }
+    });
+    
   }
 }

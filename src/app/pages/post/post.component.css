@@ -1,5 +1,4 @@
 /* Post Page Premium Styles */
-
 :root {
   --bg: #0f1115;
   --card: #1a1d24;
@@ -232,7 +231,31 @@
 .post-image-wrapper:hover .post-image {
   transform: scale(1.05);
 }
-
+/* Comments Form*/
+.comment-form {
+  display: flex;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: 2rem;
+}
+.comment-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: var(--input-bg);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+.comment-button{
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  border: none;
+  color: #fff;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition);
+}
 /* Comments Section */
 .comments-section {
   background: var(--card);

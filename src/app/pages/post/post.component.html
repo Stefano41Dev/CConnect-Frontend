@@ -58,9 +58,19 @@
             </div>
           </article>
         }
-
+        
         <!-- Comments Section -->
         <div class="comments-section">
+          
+          <!-- Formulario añadir -->
+          <h3>Agregar comentario</h3>
+          <form [formGroup]="formComment" class="comment-form">
+            <input type="text" formControlName="contenido" placeholder="Escribe tu comentario..." class="comment-input"/>
+            <button type="button" (click)="newComment(post()!.id)" [disabled]="formComment.invalid" class="comment-button">
+              Publicar
+            </button>
+          </form>
+          <!--Seccion de comentarios-->
           <h3 class="comments-title">Comentarios</h3>
           
           @if(comments() && comments()!.content.length === 0) {
