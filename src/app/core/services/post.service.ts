@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { environment } from "../../../environment/environment";
 import { Observable } from "rxjs";
 import { PublicacionDtoResponse } from "../models/post/PublicacionDtoResponse";
@@ -12,9 +12,7 @@ import { ComentarioDtoResponse } from "../models/comment/ComentarioDtoResponse";
 export class PostService {
     private readonly apiUrl = `${environment.apiUrl}/posts`;
     
-    constructor(
-        private httpClient: HttpClient
-    ){}
+    private httpClient = inject(HttpClient);
 
     listPosts(page: number = 0,size: number = 10, sort: string = 'fechaPublicacion,desc'):Observable<PageResponse<PublicacionDtoResponse>> {
 

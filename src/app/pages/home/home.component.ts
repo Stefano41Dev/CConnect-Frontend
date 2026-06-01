@@ -8,11 +8,9 @@ import { FeedComponent } from "../feed/feed.component";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, Navbar, SiderbarHome, FeedComponent],
+  imports: [CommonModule, RouterModule, Navbar, SiderbarHome],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  
-  
 }

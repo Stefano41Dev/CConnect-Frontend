@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { PostService } from '../../core/services/post.service';
 import { PublicacionDtoResponse } from '../../core/models/post/PublicacionDtoResponse';
 import { PostCard } from '../../shared/components/post-card/post-card';
@@ -10,8 +10,7 @@ import { PostCard } from '../../shared/components/post-card/post-card';
   styleUrl: './feed.component.css',
 })
 export class FeedComponent {
-  constructor(private postService: PostService){}
-
+  private postService = inject(PostService)
   posts = signal<PublicacionDtoResponse[]>([]);
 
   currentPage = 0;  

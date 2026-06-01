@@ -6,16 +6,14 @@ import { PublicacionDtoResponse } from '../../core/models/post/PublicacionDtoRes
 import { ComentarioDtoResponse } from '../../core/models/comment/ComentarioDtoResponse';
 import { forkJoin } from 'rxjs';
 import { PageResponse } from '../../core/models/pagination/PageResponse';
-import { Navbar } from '../../shared/components/navbar/navbar';
-import { SiderbarHome } from '../../shared/components/siderbar-home/siderbar-home';
 import { Loading } from '../../shared/components/loading/loading';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ComentarioDtoRequest } from '../../core/models/comment/ComentarioDtoRequest';
 import { CommentService } from '../../core/services/comment.service';
 
 @Component({
   selector: 'app-post',
-  imports: [CommonModule, Navbar, SiderbarHome, Loading, ReactiveFormsModule],
+  imports: [CommonModule, Loading, ReactiveFormsModule],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css',
 })
@@ -33,6 +31,7 @@ export class PostComponent {
   protected readonly formComment = new FormGroup({
     contenido: new FormControl('',{
       nonNullable: true,
+      validators: [Validators.required]
     })
   })
 
@@ -96,6 +95,10 @@ export class PostComponent {
   newComment(idPublicacion:string){
     const {contenido} = this.formComment.getRawValue();
 
+    if (!contenido.trim()) {
+      return;
+    }
+  
     const comentarioRequest: ComentarioDtoRequest = {
       idPublicacion: idPublicacion,
       contenido: contenido
