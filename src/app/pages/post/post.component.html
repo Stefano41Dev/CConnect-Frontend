@@ -1,21 +1,4 @@
-<div class="post-page-container">
-  <!-- Background decorativo -->
-  <div class="post-bg" aria-hidden="true">
-    <div class="post-bg__orb post-bg__orb--1"></div>
-    <div class="post-bg__orb post-bg__orb--2"></div>
-    <div class="post-bg__grid"></div>
-  </div>
 
-  <!-- Navbar -->
-  <app-navbar/>
-
-  <!-- Main container -->
-  <div class="main-container">
-    <!-- Sidebar -->
-    <app-siderbar-home/>
-    
-    <!-- Feed -->
-    <main class="post-feed">
       @if(loading()) {
         <app-loading/>
       } @else {
@@ -130,7 +113,4 @@
           }
         </div>
       }
-    </main>
-  </div>
-</div>
 

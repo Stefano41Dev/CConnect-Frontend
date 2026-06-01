@@ -2,10 +2,12 @@
       <div class="sidebar-content">
         <nav class="sidebar-nav">
           @for (item of sidebarItems; track item.label) {
-            <button
+            <a
               class="sidebar-item"
               [class.active]="activeMenu() === item.label.toLowerCase()"
+              [routerLink] = "item.router"
               (click)="setActiveMenu(item.label.toLowerCase())"
+              routerLinkActive="active"
             >
               <span class="sidebar-item-icon">
                 @switch (item.icon) {
@@ -26,7 +28,7 @@
                 }
               </span>
               <span class="sidebar-item-label">{{ item.label }}</span>
-            </button>
+            </a>
           }
         </nav>
 

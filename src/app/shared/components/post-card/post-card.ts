@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './post-card.html',
   styleUrl: './post-card.css',
 })
@@ -21,7 +21,5 @@ export class PostCard {
     imagenesUrl: string[],
     totalComentarios: number
   }
-  verInfo(id:string){
-    this.router.navigate(['/post', id]);
-  }
+  
 }

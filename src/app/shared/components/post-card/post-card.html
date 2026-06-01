@@ -43,10 +43,10 @@
 
             <!-- Post Footer -->
             <div class="post-footer">
-              <button
+              <a
                 class="post-action post-action--comment"
                 aria-label="Comentar"
-                (click)="verInfo(post.id)"
+                [routerLink]="['/home/post', post.id]"
               >
                 <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
                   <path
@@ -54,6 +54,6 @@
                   />
                 </svg>
                 <span class="action-count">{{ post.totalComentarios }}</span>
-              </button>
+              </a>
             </div>
 </article>
