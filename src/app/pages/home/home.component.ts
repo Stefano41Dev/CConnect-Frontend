@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Navbar } from "../../shared/components/navbar/navbar";
 import { SiderbarHome } from "../../shared/components/siderbar-home/siderbar-home";
-import { FeedComponent } from "../feed/feed.component";
 
 @Component({
   selector: 'app-home',
