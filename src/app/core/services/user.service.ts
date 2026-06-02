@@ -21,8 +21,19 @@ export class UserService{
     getUserMe(): Observable<UsuarioDtoResponse>{
         return this.httpClient.get<UsuarioDtoResponse>(`${this.apiUrl}/me`);
     }
+    
+
     getListFreindsByIdUser(idUsuario: string, page: number = 0, size: number = 9): Observable<PageResponse<UsuarioPerfilDtoResponse>>{
         return this.httpClient.get<PageResponse<UsuarioPerfilDtoResponse>>(`${this.apiUrl}/${idUsuario}/friends`, {
+            params: {
+                page: page.toString(),
+                size: size.toString()
+            }
+        });
+    }
+
+    getListUserByUsername(username: string, page: number = 0, size: number = 9): Observable<PageResponse<UsuarioPerfilDtoResponse>>{
+        return this.httpClient.get<PageResponse<UsuarioPerfilDtoResponse>>(`${this.apiUrl}/search/${username}`, {
             params: {
                 page: page.toString(),
                 size: size.toString()

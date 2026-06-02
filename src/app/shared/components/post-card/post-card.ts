@@ -9,8 +9,6 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './post-card.css',
 })
 export class PostCard {
-  private router = inject(Router);
-
   @Input({required:true})
   post!:{
     id: string,

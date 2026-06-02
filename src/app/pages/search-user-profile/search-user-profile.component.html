@@ -1,0 +1,5 @@
+<div>
+    @for (user of users()?.content; track user.id) {
+        <app-card-profile-user [user]="user"/>
+    }
+</div>
