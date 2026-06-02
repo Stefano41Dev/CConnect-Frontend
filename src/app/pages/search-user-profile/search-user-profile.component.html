@@ -1,5 +1,7 @@
-<div>
-    @for (user of users()?.content; track user.id) {
-        <app-card-profile-user [user]="user"/>
-    }
+<div class="search-container">
+    <div class="search-grid">
+        @for (user of users()?.content; track user.id) {
+            <app-card-profile-user [user]="user"/>
+        }
+    </div>
 </div>

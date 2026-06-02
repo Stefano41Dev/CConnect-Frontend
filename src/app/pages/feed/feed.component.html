@@ -1,5 +1,5 @@
 <div class="posts-container">
-        @for (post of posts(); track post.userid) {
+        @for (post of posts(); track post.id) {
           <app-post-card [post]="post"/>
         }
 </div>

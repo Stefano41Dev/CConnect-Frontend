@@ -1,0 +1,55 @@
+:root {
+  --bg: #0f1115;
+  --card: #1a1d24;
+  --card-border: rgba(255, 255, 255, 0.06);
+  --primary: #6c5cf2;
+  --primary-light: #8b5cf6;
+  --gradient: linear-gradient(135deg, #6c5cf2 0%, #8b5cf6 100%);
+  --text: #f2f3f5;
+  --text-muted: #949ba4;
+  --text-dim: #6d7178;
+  --input-bg: #111318;
+  --glow: rgba(108, 92, 242, 0.35);
+  --shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  background: var(--bg);
+}
+
+.search-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .search-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .search-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+  }
+}
