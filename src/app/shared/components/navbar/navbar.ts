@@ -5,7 +5,7 @@ import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [ ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
