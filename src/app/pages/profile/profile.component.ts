@@ -4,6 +4,7 @@ import { UserService } from '../../core/services/user.service';
 import { UsuarioDtoResponse } from '../../core/models/user/UsuarioDtoResponse';
 import { UsuarioPerfilDtoResponse } from '../../core/models/user/UsuarioPerfilDtoResponse';
 import { PageResponse } from '../../core/models/pagination/PageResponse';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,30 +16,36 @@ import { PageResponse } from '../../core/models/pagination/PageResponse';
 export class ProfileComponent implements OnInit {
   
   private readonly userService = inject(UserService);
-  
+  private activeRoute = inject(ActivatedRoute);
+  private router = inject(Router);
+
   user = signal<UsuarioDtoResponse | null>(null);
   friends = signal<UsuarioPerfilDtoResponse[]>([]);
   currentPage = signal<number>(0);
   totalPages = signal<number>(0);
   pageSize = signal<number>(9);
   loading = signal<boolean>(true);
-
+  userId: string | null = null;
   ngOnInit(): void {
-    this.loadUserProfile();
+      
+    this.activeRoute.paramMap.subscribe(params => {
+      this.userId = params.get('id');
+      if(!this.userId) return;
+    
+      this.userService.getUserById(this.userId).subscribe({
+        next: (userData) => {
+          this.user.set(userData);
+          this.loadFriends();
+        },
+        error: () => {
+          this.loading.set(false);
+        }
+      });
+    });
+    
     
   }
 
-  private loadUserProfile(): void {
-    this.userService.getUserMe().subscribe({
-      next: (userData) => {
-        this.user.set(userData);
-        this.loadFriends();
-      },
-      error: () => {
-        this.loading.set(false);
-      }
-    });
-  }
 
   private loadFriends(page: number = 0): void {
     const userId = this.user()?.id;
@@ -66,5 +73,9 @@ export class ProfileComponent implements OnInit {
 
   getDefaultProfileImage(): string {
     return 'default-profile.jpg';
+  }
+
+  navigateProfile(id: string) {
+    this.router.navigate(['/home/profile', id]);
   }
 }

@@ -19,7 +19,7 @@ export const routes: Routes = [
         component: FeedComponent
       },
       {
-        path: 'profile',
+        path: 'profile/:id',
         component: ProfileComponent
       },
       {

@@ -35,7 +35,7 @@
     
     <!-- Friends Grid -->
     <div class="friends-grid" *ngIf="!loading() && friends().length > 0">
-      <div class="friend-card" *ngFor="let friend of friends()">
+      <div class="friend-card" *ngFor="let friend of friends()" (click)="navigateProfile(friend.id)">
         <div class="friend-card__image-wrapper">
           <img 
             [src]="getDefaultProfileImage()" 
