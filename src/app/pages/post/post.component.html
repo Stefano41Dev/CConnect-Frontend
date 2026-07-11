@@ -1,10 +1,35 @@
+<div class="post-layout">
+  @if(loading()) {
+    <app-loading/>
+  } @else {
+    @if(post()) {
+      
 
-      @if(loading()) {
-        <app-loading/>
-      } @else {
-        <!-- Post Detail Card -->
-        @if(post()) {
-          <article class="post-detail-card">
+      <!-- Images + Comments side by side -->
+      <div
+        class="post-body"
+        [class.post-body--no-images]="!post()?.imagenesUrl || post()!.imagenesUrl.length === 0"
+      >
+        @if (post()?.imagenesUrl && post()!.imagenesUrl.length > 0) {
+          <div class="post-images-panel">
+            <div class="post-images" [ngClass]="'grid-' + post()!.imagenesUrl.length">
+              @for (image of post()!.imagenesUrl; track image; let i = $index) {
+                <div class="post-image-wrapper">
+                  <img
+                    [src]="image"
+                    alt="Post image {{ i + 1 }}"
+                    class="post-image"
+                  />
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+          <!-- Post Detail Card -->
+         
             <!-- Post Header -->
             <div class="post-header">
               <div class="post-author">
@@ -23,28 +48,7 @@
             <!-- Post Content -->
             <div class="post-content">
               <p class="post-text">{{ post()?.contenido }}</p>
-
-              <!-- Images Grid -->
-              @if (post()?.imagenesUrl && post()!.imagenesUrl.length > 0) {
-                <div class="post-images" [ngClass]="'grid-' + post()!.imagenesUrl.length">
-                  @for (image of post()!.imagenesUrl; track image; let i = $index) {
-                    <div class="post-image-wrapper">
-                      <img
-                        [src]="image"
-                        alt="Post image {{ i + 1 }}"
-                        class="post-image"
-                      />
-                    </div>
-                  }
-                </div>
-              }
             </div>
-          </article>
-        }
-        
-        <!-- Comments Section -->
-        <div class="comments-section">
-          
           <!-- Formulario añadir -->
           <h3>Agregar comentario</h3>
           <form [formGroup]="formComment" class="comment-form">
@@ -112,5 +116,8 @@
             </div>
           }
         </div>
-      }
+      </div>
+    }
+  }
+</div>
 

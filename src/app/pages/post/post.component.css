@@ -101,7 +101,13 @@
   width: 100%;
 }
 
-/* Post Detail Card */
+/* Post Layout */
+.post-layout {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Post Detail Card 
 .post-detail-card {
   background: var(--card);
   border: 1px solid var(--card-border);
@@ -110,8 +116,8 @@
   backdrop-filter: blur(20px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   width: 100%;
-  max-width: 760px;
-  margin-bottom: 2rem;
+  max-width: 100%;
+  margin-bottom: 1.5rem;
   transition:
     transform var(--transition),
     box-shadow var(--transition),
@@ -123,7 +129,7 @@
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
   border-color: rgba(255, 255, 255, 0.08);
 }
-
+*/
 /* Post Header */
 .post-header {
   display: flex;
@@ -171,7 +177,7 @@
 
 /* Post Content */
 .post-content {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .post-text {
@@ -181,14 +187,35 @@
   color: var(--text);
   white-space: pre-wrap;
   word-wrap: break-word;
-  margin-bottom: 1.5rem;
+}
+
+/* Post Body: Images + Comments side by side */
+.post-body {
+  display: flex;
+  gap: 1.5rem;
+  align-items: stretch;
+  width: 100%;
+}
+
+.post-body--no-images {
+  justify-content: center;
+}
+
+.post-images-panel {
+  flex: 1;
+  min-width: 0;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 /* Post Images */
 .post-images {
   display: grid;
   gap: 0.75rem;
-  margin-top: 1.5rem;
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
@@ -264,7 +291,13 @@
   padding: 2rem;
   backdrop-filter: blur(20px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  flex: 1;
+  min-width: 0;
   width: 100%;
+  max-width: none;
+}
+
+.post-body--no-images .comments-section {
   max-width: 760px;
 }
 
@@ -413,13 +446,24 @@
   }
 }
 
+@media (max-width: 992px) {
+  .post-body {
+    flex-direction: column;
+  }
+
+  .post-body--no-images .comments-section {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .post-feed {
     padding: 1rem 1rem;
   }
 
   .post-detail-card,
-  .comments-section {
+  .comments-section,
+  .post-images-panel {
     padding: 1.5rem;
     margin-bottom: 1rem;
   }
@@ -452,7 +496,8 @@
 
 @media (max-width: 480px) {
   .post-detail-card,
-  .comments-section {
+  .comments-section,
+  .post-images-panel {
     padding: 1rem;
     border-radius: var(--radius-md);
   }
