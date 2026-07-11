@@ -79,7 +79,7 @@ export class PostModalComponent {
   triggerFileInput(): void {
     this.fileInput?.click();
   }
-
+  
   getGridClass(): string {
     const count = this.selectedImages().length;
     if (count === 1) return 'grid-single';
