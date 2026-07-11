@@ -1,27 +1,17 @@
 /* Profile Component Styles - Premium Theme */
 
-:root {
-  --bg: #0f1115;
-  --card: #1a1d24;
-  --card-border: rgba(255, 255, 255, 0.06);
-  --primary: #6c5cf2;
-  --primary-light: #8b5cf6;
-  --gradient: linear-gradient(135deg, #6c5cf2 0%, #8b5cf6 100%);
-  --text: #f2f3f5;
-  --text-muted: #949ba4;
-  --text-dim: #6d7178;
-  --input-bg: #111318;
-  --glow: rgba(108, 92, 242, 0.35);
-  --shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
-  --radius-lg: 20px;
-  --radius-md: 12px;
-  --radius-sm: 8px;
-  --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 .profile-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.profile-sidebar {
+  flex: 0 0 380px;
+ 
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -276,7 +266,70 @@
   font-weight: 500;
 }
 
+/* Posts Section */
+.posts-section {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-height: calc(100vh - 120px);
+}
+
+.posts-section__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+.posts-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.posts-list::-webkit-scrollbar-thumb {
+  background: rgba(108, 92, 242, 0.4);
+  border-radius: 999px;
+}
+
+.posts-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.posts-section .pagination {
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
 /* Responsive */
+@media (max-width: 992px) {
+  .profile-container {
+    flex-direction: column;
+  }
+
+  .profile-sidebar {
+    flex: 1;
+    width: 100%;
+  }
+
+  .posts-section {
+    max-height: none;
+  }
+}
+
 @media (max-width: 768px) {
   .profile-header__content {
     flex-direction: column;
@@ -309,6 +362,10 @@
   }
 
   .profile-container {
+    gap: 1.5rem;
+  }
+
+  .profile-sidebar {
     gap: 1.5rem;
   }
 

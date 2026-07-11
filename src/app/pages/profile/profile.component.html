@@ -1,82 +1,126 @@
 <div class="profile-container">
-  <!-- User Profile Header -->
-  <div class="profile-header" *ngIf="user()">
-    <div class="profile-header__content">
-      <!-- Profile Image -->
-      <div class="profile-header__image-wrapper">
-        <img 
-          [src]="getDefaultProfileImage()" 
-          alt="Profile" 
-          class="profile-header__image"
-        />
-      </div>
-      
-      <!-- User Info -->
-      <div class="profile-header__info">
-        <h1 class="profile-header__username">{{ user()?.username }}</h1>
-        <p class="profile-header__email">{{ user()?.email }}</p>
-        <p class="profile-header__birthdate">
-          <span class="label">Nacimiento:</span> 
-          {{ user()?.fechaNacimiento | date: 'dd/MM/yyyy' }}
-        </p>
-        <div class="profile-header__stats">
-          <div class="stat">
-            <span class="stat__value">{{ user()?.amigosIds?.length || 0 }}</span>
-            <span class="stat__label">Amigos</span>
+  <div class="profile-sidebar">
+    <!-- User Profile Header -->
+    <div class="profile-header" *ngIf="user()">
+      <div class="profile-header__content">
+        <!-- Profile Image -->
+        <div class="profile-header__image-wrapper">
+          <img 
+            [src]="getDefaultProfileImage()" 
+            alt="Profile" 
+            class="profile-header__image"
+          />
+        </div>
+        
+        <!-- User Info -->
+        <div class="profile-header__info">
+          <h1 class="profile-header__username">{{ user()?.username }}</h1>
+          <p class="profile-header__email">{{ user()?.email }}</p>
+          <p class="profile-header__birthdate">
+            <span class="label">Nacimiento:</span> 
+            {{ user()?.fechaNacimiento | date: 'dd/MM/yyyy' }}
+          </p>
+          <div class="profile-header__stats">
+            <div class="stat">
+              <span class="stat__value">{{ user()?.amigosIds?.length || 0 }}</span>
+              <span class="stat__label">Amigos</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Friends Section -->
-  <section class="friends-section">
-    <h2 class="friends-section__title">Amigos</h2>
-    
-    <!-- Friends Grid -->
-    <div class="friends-grid" *ngIf="!loading() && friends().length > 0">
-      <div class="friend-card" *ngFor="let friend of friends()" (click)="navigateProfile(friend.id)">
-        <div class="friend-card__image-wrapper">
-          <img 
-            [src]="getDefaultProfileImage()" 
-            alt="{{ friend.username }}" 
-            class="friend-card__image"
-          />
-        </div>
-        <div class="friend-card__content">
-          <h3 class="friend-card__username">{{ friend.username }}</h3>
+    <!-- Friends Section -->
+    <section class="friends-section">
+      <h2 class="friends-section__title">Amigos</h2>
+      
+      <!-- Friends Grid -->
+      <div class="friends-grid" *ngIf="!loadingFriends() && friends().length > 0">
+        <div class="friend-card" *ngFor="let friend of friends()" (click)="navigateProfile(friend.id)">
+          <div class="friend-card__image-wrapper">
+            <img 
+              [src]="getDefaultProfileImage()" 
+              alt="{{ friend.username }}" 
+              class="friend-card__image"
+            />
+          </div>
+          <div class="friend-card__content">
+            <h3 class="friend-card__username">{{ friend.username }}</h3>
+          </div>
         </div>
       </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="!loadingFriends() && friends().length === 0">
+        <p class="empty-state__text">No tienes amigos aún</p>
+      </div>
+
+      <!-- Loading State -->
+      <div class="loading-state" *ngIf="loadingFriends()">
+        <p class="loading-state__text">Cargando amigos...</p>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" *ngIf="!loadingFriends() && totalPages() > 1">
+        <button 
+          class="pagination__button" 
+          (click)="goToPage(currentPage() - 1)"
+          [disabled]="currentPage() === 0"
+        >
+          Anterior
+        </button>
+        
+        <div class="pagination__info">
+          Página {{ currentPage() + 1 }} de {{ totalPages() }}
+        </div>
+        
+        <button 
+          class="pagination__button" 
+          (click)="goToPage(currentPage() + 1)"
+          [disabled]="currentPage() + 1 === totalPages()"
+        >
+          Siguiente
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Posts Section -->
+  <section class="posts-section">
+    <h2 class="posts-section__title">Publicaciones</h2>
+
+    <div class="loading-state" *ngIf="loadingPosts()">
+      <p class="loading-state__text">Cargando publicaciones...</p>
     </div>
 
-    <!-- Empty State -->
-    <div class="empty-state" *ngIf="!loading() && friends().length === 0">
-      <p class="empty-state__text">No tienes amigos aún</p>
+    <div class="empty-state" *ngIf="!loadingPosts() && (!posts() || posts()!.content.length === 0)">
+      <p class="empty-state__text">No hay publicaciones aún</p>
     </div>
 
-    <!-- Loading State -->
-    <div class="loading-state" *ngIf="loading()">
-      <p class="loading-state__text">Cargando amigos...</p>
+    <div class="posts-list" *ngIf="!loadingPosts() && posts() && posts()!.content.length > 0">
+      <app-post-card
+        *ngFor="let post of posts()!.content"
+        [post]="post"
+      />
     </div>
 
-    <!-- Pagination -->
-    <div class="pagination" *ngIf="!loading() && totalPages() > 1">
-      <button 
-        class="pagination__button" 
-        (click)="goToPage(currentPage() - 1)"
-        [disabled]="currentPage() === 0"
+    <div class="pagination" *ngIf="!loadingPosts() && postsTotalPages() > 1">
+      <button
+        class="pagination__button"
+        (click)="goToPostsPage(postsCurrentPage() - 1)"
+        [disabled]="postsCurrentPage() === 0"
       >
         Anterior
       </button>
-      
+
       <div class="pagination__info">
-        Página {{ currentPage() + 1 }} de {{ totalPages() }}
+        Página {{ postsCurrentPage() + 1 }} de {{ postsTotalPages() }}
       </div>
-      
-      <button 
-        class="pagination__button" 
-        (click)="goToPage(currentPage() + 1)"
-        [disabled]="currentPage() + 1 === totalPages()"
+
+      <button
+        class="pagination__button"
+        (click)="goToPostsPage(postsCurrentPage() + 1)"
+        [disabled]="postsCurrentPage() + 1 === postsTotalPages()"
       >
         Siguiente
       </button>

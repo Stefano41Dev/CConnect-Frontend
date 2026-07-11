@@ -24,8 +24,18 @@ export class PostService {
         return this.httpClient.get<PageResponse<PublicacionDtoResponse>>(this.apiUrl,{ params });
     }
     
-    listPostsById(id: string):Observable<PageResponse<PublicacionDtoResponse>>{
-        return this.httpClient.get<PageResponse<PublicacionDtoResponse>>(`${this.apiUrl}/user/${id}`);
+    listPostsById(
+        id: string,
+        page: number = 0,
+        size: number = 10,
+        sort: string = 'fechaPublicacion,desc'
+    ): Observable<PageResponse<PublicacionDtoResponse>> {
+        const params = new HttpParams()
+            .set('page', page)
+            .set('size', size)
+            .set('sort', sort);
+
+        return this.httpClient.get<PageResponse<PublicacionDtoResponse>>(`${this.apiUrl}/user/${id}`, { params });
     }
 
     newPost(publicacion: PublicacionDtoRequest, imagenes: File[]): Observable<PublicacionDtoResponse> {
