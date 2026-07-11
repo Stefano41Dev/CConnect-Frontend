@@ -5,6 +5,8 @@ import { UsuarioDtoResponse } from '../../core/models/user/UsuarioDtoResponse';
 import { UsuarioPerfilDtoResponse } from '../../core/models/user/UsuarioPerfilDtoResponse';
 import { PageResponse } from '../../core/models/pagination/PageResponse';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PostService } from '../../core/services/post.service';
+import { PublicacionDtoResponse } from '../../core/models/post/PublicacionDtoResponse';
 
 @Component({
   selector: 'app-profile',
@@ -16,10 +18,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
   
   private readonly userService = inject(UserService);
+  private readonly postService = inject(PostService);
   private activeRoute = inject(ActivatedRoute);
   private router = inject(Router);
 
   user = signal<UsuarioDtoResponse | null>(null);
+  posts = signal<PageResponse<PublicacionDtoResponse>| null>(null);
+
   friends = signal<UsuarioPerfilDtoResponse[]>([]);
   currentPage = signal<number>(0);
   totalPages = signal<number>(0);
@@ -36,17 +41,35 @@ export class ProfileComponent implements OnInit {
         next: (userData) => {
           this.user.set(userData);
           this.loadFriends();
+          this.loadPostsUserId();
         },
         error: () => {
           this.loading.set(false);
         }
       });
+
+      
     });
-    
+
+   
     
   }
 
+  private loadPostsUserId(){
+    const userId = this.user()?.id;
+    if (!userId) return;
 
+    this.loading.set(true);
+    this.postService.listPostsById(userId).subscribe({
+        next: (userPosts) => {
+          this.posts.set(userPosts);
+          console.log(this.posts()?.content)
+        },
+        error: () => {
+          this.loading.set(false);
+        }
+      });
+  }
   private loadFriends(page: number = 0): void {
     const userId = this.user()?.id;
     if (!userId) return;

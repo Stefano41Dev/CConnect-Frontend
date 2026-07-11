@@ -23,6 +23,10 @@ export class PostService {
 
         return this.httpClient.get<PageResponse<PublicacionDtoResponse>>(this.apiUrl,{ params });
     }
+    
+    listPostsById(id: string):Observable<PageResponse<PublicacionDtoResponse>>{
+        return this.httpClient.get<PageResponse<PublicacionDtoResponse>>(`${this.apiUrl}/user/${id}`);
+    }
 
     newPost(publicacion: PublicacionDtoRequest, imagenes: File[]): Observable<PublicacionDtoResponse> {
         const formData = new FormData();
